@@ -34,6 +34,7 @@ export interface Article {
   title: string
   headlineimage: Media
   author: Author
+  slug?: string
   description: string
   category: string | Category
   tags?: string[] | Tag[]

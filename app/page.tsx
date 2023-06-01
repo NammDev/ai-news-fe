@@ -1,12 +1,16 @@
+import qs from 'qs'
 import { Article, SuccessResponse } from '@/@types/payload'
 import { formatDate } from '@/lib/utils'
+
 import Image from 'next/image'
 
 export default async function Home() {
-  // const res = await fetch(`http://localhost:8000/api/articles`, { cache: 'no-store' })
-  const res = await fetch(`https://ai-news-be-production.up.railway.app/api/articles`, {
+  const res = await fetch(`http://localhost:8000/api/articles`, {
     cache: 'no-store',
   })
+  // const res = await fetch(`https://ai-news-be-production.up.railway.app/api/articles`, {
+  //   cache: 'no-store',
+  // })
   const data = (await res.json()) as SuccessResponse<Article>
   console.log(data.totalDocs)
   const articles = data.docs
@@ -21,7 +25,7 @@ export default async function Home() {
                 <a
                   key={index}
                   className='flex transition duration-300 ease-in-out hover:scale-105'
-                  href='/promotion-for-utm-run-game-coordinatorlinebacker-coach-after-defensive-coordinators-departure'
+                  href={`${article.slug}`}
                 >
                   <article className='flex flex-col overflow-hidden shadow-xl rounded-2xl'>
                     <Image
