@@ -11,7 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-slate-50`}>
+        <nav></nav>
+        <h1 className='text-8xl'>News</h1>
+        {children}
+      </body>
     </html>
   )
 }
