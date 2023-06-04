@@ -32,16 +32,21 @@ export interface Config {
 export interface Article {
   id: string
   title: string
-  headlineimage: Media
+  previewimage: Media
   author: Author
   slug?: string
-  description: string
+  excerpt: string
   category: string | Category
   tags?: string[] | Tag[]
   content: {
     [k: string]: unknown
   }[]
   status?: 'draft' | 'published'
+  meta?: {
+    title?: string
+    description?: string
+    image?: string | Media
+  }
   updatedAt: string
   createdAt: string
 }

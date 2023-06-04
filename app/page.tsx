@@ -1,19 +1,10 @@
-import qs from 'qs'
-import { Article, SuccessResponse } from '@/@types/payload'
 import { formatDate } from '@/lib/utils'
+import { fetchArticles } from '@/restApi'
 
 import Image from 'next/image'
 
 export default async function Home() {
-  const res = await fetch(`http://localhost:8000/api/articles`, {
-    cache: 'no-store',
-  })
-  // const res = await fetch(`https://ai-news-be-production.up.railway.app/api/articles`, {
-  //   cache: 'no-store',
-  // })
-  const data = (await res.json()) as SuccessResponse<Article>
-  console.log(data.totalDocs)
-  const articles = data.docs
+  const articles = await fetchArticles()
 
   return (
     <section className='relative py-12 mx-auto max-w-7xl md:py-16 lg:py-20 lg:px-8'>
@@ -29,7 +20,7 @@ export default async function Home() {
                 >
                   <article className='flex flex-col overflow-hidden shadow-xl rounded-2xl'>
                     <Image
-                      alt={article.headlineimage.alt}
+                      alt={'sss'}
                       loading='lazy'
                       width={388}
                       height={192}
@@ -38,7 +29,7 @@ export default async function Home() {
                       className='flex-shrink-0 object-cover w-full h-48'
                       style={{ color: 'transparent' }}
                       sizes='50vw'
-                      src={`/media/${article.headlineimage?.filename}`}
+                      src={`/media/${article.previewimage?.filename}`}
                     />
                     <div className='flex flex-col justify-between flex-1 p-6 bg-white'>
                       <div className='flex-1'>
@@ -47,7 +38,7 @@ export default async function Home() {
                           <h3 className='text-xl font-semibold font-cal text-slate-900'>
                             {article.title}
                           </h3>
-                          <p className='mt-3 text-base text-slate-500'>{article.description}</p>
+                          <p className='mt-3 text-base text-slate-500'>{article.excerpt}</p>
                         </div>
                       </div>
                       <div className='flex items-center mt-6'>
