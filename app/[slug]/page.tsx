@@ -2,6 +2,7 @@ import React from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { fetchArticle, fetchArticles } from '@/restApi'
+import RichText from '@/components/RichText'
 
 const Post = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
@@ -16,6 +17,7 @@ const Post = async ({ params }: { params: { slug: string } }) => {
       <p>Params: {slug}</p>
       <p>Title: {article.title}</p>
       <p>{article.author.name}</p>
+      <RichText content={article.content} />
     </div>
   )
 }
