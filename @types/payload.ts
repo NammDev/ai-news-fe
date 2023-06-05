@@ -59,6 +59,7 @@ export interface Media {
   updatedAt: string
   createdAt: string
   url?: string
+  darkModeFallback?: string | Media
   filename?: string
   mimeType?: string
   filesize?: number

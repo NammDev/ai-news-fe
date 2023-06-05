@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { fetchArticle, fetchArticles } from '@/restApi'
 import RichText from '@/components/RichText'
+import { Media } from '@/components/Media'
 
 const Post = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
@@ -10,12 +11,16 @@ const Post = async ({ params }: { params: { slug: string } }) => {
 
   if (!article) return notFound()
 
+  console.log('Hello')
   console.log(article)
+  console.log(article.previewimage)
 
   return (
     <div>
       <p>Params: {slug}</p>
       <p>Title: {article.title}</p>
+      <p>{article.previewimage?.id}</p>
+      <Media resource={article.previewimage} />
       <p>{article.author.name}</p>
       <RichText content={article.content} />
     </div>

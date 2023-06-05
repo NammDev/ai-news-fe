@@ -7,7 +7,7 @@ const next = {
 
 // Get All Articles to display home page
 export const fetchArticles = async (): Promise<Article[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/articles`, { next })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/articles`, { cache: 'no-store' })
   const data = await res.json()
   return data?.docs
 }
@@ -26,7 +26,7 @@ export const fetchArticle = async (slug: string): Promise<Article> => {
     { addQueryPrefix: true }
   )
   const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/articles${stringifiedQuery}`, {
-    next,
+    cache: 'no-store',
   })
   const data = await res.json()
   return data?.docs[0]

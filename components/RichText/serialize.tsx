@@ -1,15 +1,13 @@
 import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import { Text } from 'slate'
+import RichTextUpload from './upload'
 
 type Children = Leaf[]
 
 type Leaf = {
   type: string
-  value?: {
-    url: string
-    alt: string
-  }
+
   children?: Children
   url?: string
   [key: string]: unknown
@@ -92,11 +90,8 @@ const serialize = (children?: Children): React.ReactElement[any] =>
           </a>
         )
 
-      case 'label':
-        return <Label key={i}>{serialize(node.children)}</Label>
-
-      case 'large-body': {
-        return <LargeBody key={i}>{serialize(node.children)}</LargeBody>
+      case 'upload': {
+        return <RichTextUpload key={i} node={node} />
       }
 
       default:
