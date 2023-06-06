@@ -1,6 +1,7 @@
 import React from 'react'
 import NextImage, { StaticImageData } from 'next/image'
 import classes from './index.module.scss'
+
 import { Props } from '..'
 
 const breakpoints = {
@@ -8,7 +9,6 @@ const breakpoints = {
   m: 1024,
   l: 1440,
 }
-
 export const Image: React.FC<Props> = (props) => {
   const {
     imgClassName,
@@ -23,6 +23,8 @@ export const Image: React.FC<Props> = (props) => {
   } = props
 
   const [isLoading, setIsLoading] = React.useState(true)
+
+  console.log(`Preview Image in Image: ${resource}`)
 
   let width: number | undefined
   let height: number | undefined
@@ -43,17 +45,13 @@ export const Image: React.FC<Props> = (props) => {
 
     let filename = fullFilename
 
-    src = `https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png`
-    width = 100
-    height = 100
+    src = `${process.env.NEXT_PUBLIC_CMS_URL}/${filename}`
   }
 
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
   const sizes = Object.entries(breakpoints)
     .map(([, value]) => `(max-width: ${value}px) ${value}px`)
     .join(', ')
-
-  src = `https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png`
 
   return (
     <NextImage
@@ -70,8 +68,8 @@ export const Image: React.FC<Props> = (props) => {
         }
       }}
       fill={fill}
-      width={100}
-      height={100}
+      width={!fill ? width : undefined}
+      height={!fill ? height : undefined}
       sizes={sizes}
       priority={priority}
     />

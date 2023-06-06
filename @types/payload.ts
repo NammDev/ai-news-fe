@@ -32,21 +32,20 @@ export interface Config {
 export interface Article {
   id: string
   title: string
-  previewimage: Media
-  author: Author
-  slug?: string
+  previewImage: Media
   excerpt: string
   category: string | Category
-  tags?: string[] | Tag[]
   content: {
     [k: string]: unknown
   }[]
-  status?: 'draft' | 'published'
+  tags?: string[] | Tag[]
   meta?: {
     title?: string
     description?: string
-    image?: string | Media
   }
+  slug?: string
+  author: string | Author
+  status?: 'draft' | 'published'
   updatedAt: string
   createdAt: string
 }
@@ -59,7 +58,6 @@ export interface Media {
   updatedAt: string
   createdAt: string
   url?: string
-  darkModeFallback?: string | Media
   filename?: string
   mimeType?: string
   filesize?: number
