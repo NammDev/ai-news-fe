@@ -1,4 +1,5 @@
-import React, { Fragment, ReactNode } from 'react'
+import React, { Fragment } from 'react'
+// @ts-ignore - no types :(
 import escapeHTML from 'escape-html'
 import { Text } from 'slate'
 import RichTextUpload from './upload'
@@ -12,13 +13,13 @@ type Leaf = {
     url: string
     alt: string
   }
-  children?: Children
+  children: Children
   url?: string
   [key: string]: unknown
 }
 
-const serialize = (children: Children): React.ReactNode[] => {
-  return children.map((node, i) => {
+const serialize = (children: Children): React.ReactNode[] =>
+  children.map((node, i) => {
     if (Text.isText(node)) {
       let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
 
@@ -80,20 +81,10 @@ const serialize = (children: Children): React.ReactNode[] => {
         return <li key={i}>{serialize(node.children)}</li>
       case 'link':
         return (
-          <a
-            href={escapeHTML(node.url)}
-            key={i}
-            {...(node.newTab
-              ? {
-                  target: '_blank',
-                  rel: 'noopener noreferrer',
-                }
-              : {})}
-          >
+          <a href={escapeHTML(node.url)} key={i}>
             {serialize(node.children)}
           </a>
         )
-
       case 'upload': {
         return <RichTextUpload key={i} node={node} />
       }
@@ -102,6 +93,5 @@ const serialize = (children: Children): React.ReactNode[] => {
         return <p key={i}>{serialize(node.children)}</p>
     }
   })
-}
 
 export default serialize
