@@ -1,8 +1,9 @@
 import React from 'react'
 import NextImage, { StaticImageData } from 'next/image'
-import classes from './index.module.scss'
 
 import { Props } from '..'
+import RichText from '@/components/RichText'
+import { Content } from 'next/font/google'
 
 const breakpoints = {
   s: 768,
@@ -24,8 +25,6 @@ export const Image: React.FC<Props> = (props) => {
 
   const [isLoading, setIsLoading] = React.useState(true)
 
-  console.log(`Preview Image in Image: ${resource}`)
-
   let width: number | undefined
   let height: number | undefined
   let alt = altFromProps
@@ -45,7 +44,8 @@ export const Image: React.FC<Props> = (props) => {
 
     let filename = fullFilename
 
-    src = `${process.env.NEXT_PUBLIC_CMS_URL}/${filename}`
+    // src = `${process.env.NEXT_PUBLIC_CMS_URL}/${filename}`
+    src = `${resource.url}`
   }
 
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
@@ -54,24 +54,25 @@ export const Image: React.FC<Props> = (props) => {
     .join(', ')
 
   return (
-    <NextImage
-      className={[isLoading && classes.placeholder, classes.image, imgClassName]
-        .filter(Boolean)
-        .join(' ')}
-      src={src}
-      alt={alt || ''}
-      onClick={onClick}
-      onLoad={() => {
-        setIsLoading(false)
-        if (typeof onLoadFromProps === 'function') {
-          onLoadFromProps()
-        }
-      }}
-      fill={fill}
-      width={!fill ? width : undefined}
-      height={!fill ? height : undefined}
-      sizes={sizes}
-      priority={priority}
-    />
+    <>
+      <NextImage
+        className={[imgClassName].filter(Boolean).join(' ')}
+        src={src}
+        alt={alt || ''}
+        onClick={onClick}
+        onLoad={() => {
+          setIsLoading(false)
+          if (typeof onLoadFromProps === 'function') {
+            onLoadFromProps()
+          }
+        }}
+        fill={fill}
+        width={!fill ? width : undefined}
+        height={!fill ? height : undefined}
+        sizes={sizes}
+        priority={priority}
+      />
+      {resource?.caption && <RichText content={resource.caption} />}
+    </>
   )
 }

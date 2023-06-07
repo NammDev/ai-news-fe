@@ -32,9 +32,9 @@ export interface Config {
 export interface Article {
   id: string
   title: string
-  previewImage: Media
+  preview: Media
   excerpt: string
-  category: string | Category
+  category: Category
   content: {
     [k: string]: unknown
   }[]
@@ -44,7 +44,7 @@ export interface Article {
     description?: string
   }
   slug?: string
-  author: string | Author
+  author: Author
   status?: 'draft' | 'published'
   updatedAt: string
   createdAt: string

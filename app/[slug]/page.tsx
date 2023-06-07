@@ -6,24 +6,18 @@ import { notFound } from 'next/navigation'
 import { fetchArticle, fetchArticles } from '@/restApi'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
-import { Media as MediaType } from '@/@types/payload'
+import { fetchBlogPost, fetchPosts } from '@/graphql'
 
 const Post = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
-  const article = await fetchArticle(slug)
+  const article = await fetchBlogPost(slug)
 
   if (!article) return notFound()
-
-  //title
-  console.log(`Title: ${article.title}`)
-  console.log(`Preview Image from Article: ${article.previewImage}`)
-  console.log(article)
 
   return (
     <div>
       <p>Params: {slug}</p>
       <p>Title: {article.title}</p>
-      <Media resource={article.previewImage} />
       <RichText content={article.content} />
     </div>
   )
@@ -32,7 +26,7 @@ const Post = async ({ params }: { params: { slug: string } }) => {
 export default Post
 
 export async function generateStaticParams() {
-  const articles = await fetchArticles()
+  const articles = await fetchPosts()
   return articles.map(({ slug }) => ({
     slug,
   }))

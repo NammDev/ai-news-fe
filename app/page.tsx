@@ -1,10 +1,11 @@
+import { Media } from '@/components/Media'
+import { fetchBlogPosts } from '@/graphql'
 import { formatDate } from '@/lib/utils'
-import { fetchArticles } from '@/restApi'
 
 import Image from 'next/image'
 
 export default async function Home() {
-  const articles = await fetchArticles()
+  const articles = await fetchBlogPosts()
 
   return (
     <section className='relative py-12 mx-auto max-w-7xl md:py-16 lg:py-20 lg:px-8'>
@@ -19,18 +20,11 @@ export default async function Home() {
                   href={`${article.slug}`}
                 >
                   <article className='flex flex-col overflow-hidden shadow-xl rounded-2xl'>
-                    <Image
-                      alt={'sss'}
-                      loading='lazy'
-                      width={388}
-                      height={192}
-                      decoding='async'
-                      data-nimg={1}
-                      className='flex-shrink-0 object-cover w-full h-48'
-                      style={{ color: 'transparent' }}
-                      sizes='50vw'
-                      src={`/media/${article.previewimage?.filename}`}
+                    <Media
+                      className='flex-shrink-0 object-cover w-full h-48 text-transparent'
+                      resource={article.preview}
                     />
+                    {/* width={388} height={192} */}
                     <div className='flex flex-col justify-between flex-1 p-6 bg-white'>
                       <div className='flex-1'>
                         <p className='text-sm font-medium uppercase text-brand-600'>FCS</p>
@@ -44,7 +38,7 @@ export default async function Home() {
                       <div className='flex items-center mt-6'>
                         <div className='flex-shrink-0'>
                           <div className='w-10 h-10'>
-                            <span className='sr-only'>{article.author.name}</span>
+                            <span className='sr-only'>{article.author?.name}</span>
                             <Image
                               alt="Michael Terril's avatar"
                               loading='lazy'
