@@ -1,11 +1,6 @@
 import React from 'react'
-import { Metadata } from 'next'
-import qs from 'qs'
-
 import { notFound } from 'next/navigation'
-import { fetchArticle, fetchArticles } from '@/restApi'
 import RichText from '@/components/RichText'
-import { Media } from '@/components/Media'
 import { fetchBlogPost, fetchPosts } from '@/graphql'
 
 const Post = async ({ params }: { params: { slug: string } }) => {
