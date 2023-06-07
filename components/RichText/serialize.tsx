@@ -1,20 +1,24 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import escapeHTML from 'escape-html'
 import { Text } from 'slate'
 import RichTextUpload from './upload'
 
+// eslint-disable-next-line no-use-before-define
 type Children = Leaf[]
 
 type Leaf = {
   type: string
-
+  value?: {
+    url: string
+    alt: string
+  }
   children?: Children
   url?: string
   [key: string]: unknown
 }
 
-const serialize = (children?: Children): React.ReactElement[any] =>
-  children?.map((node, i) => {
+const serialize = (children: Children): React.ReactNode[] => {
+  return children.map((node, i) => {
     if (Text.isText(node)) {
       let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
 
@@ -98,5 +102,6 @@ const serialize = (children?: Children): React.ReactElement[any] =>
         return <p key={i}>{serialize(node.children)}</p>
     }
   })
+}
 
 export default serialize
