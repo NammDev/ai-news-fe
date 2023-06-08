@@ -1,9 +1,7 @@
 import React from 'react'
 import NextImage, { StaticImageData } from 'next/image'
-
 import { Props } from '..'
 import RichText from '@/components/RichText'
-import { Content } from 'next/font/google'
 
 const breakpoints = {
   s: 768,

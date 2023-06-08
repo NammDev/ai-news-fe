@@ -7,7 +7,7 @@ import { StaticImageData } from 'next/image'
 import { Media as MediaType } from '@/@types/payload'
 
 export type Props = {
-  src?: StaticImageData // for static media
+  src?: string // for static media
   alt?: string
   resource?: MediaType // for Payload media
   size?: string // for NextImage only
