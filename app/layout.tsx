@@ -1,5 +1,5 @@
-import { defaultOpenGraph, mergeOpenGraph } from '@/seo/openGraph'
-import './globals.css'
+import { mergeOpenGraph } from '@/seo/openGraph'
+import 'styles/globals.css'
 import { Inter } from 'next/font/google'
 import { Metadata } from 'next'
 
