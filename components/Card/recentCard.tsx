@@ -5,15 +5,15 @@ import Image from 'next/image'
 import { formatDate } from '@/lib/utils'
 
 export const RecentCard: React.FC<BlogCardProps> = (props) => {
-  const { createdAt, href, media, title, author } = props
+  const { createdAt, href, media, title, author, category } = props
   return (
     <article className='py-8'>
       <div className='group md:flex lg:flex-col xl:flex-row xl:items-center'>
         <div className='order-2 w-full md:w-2/5 lg:order-1 lg:w-full xl:w-2/5'>
-          <Link className='block aspect-w-16 aspect-h-9' href={href}>
+          <Link className='block' href={href}>
             <Media
               resource={media}
-              className='object-cover overflow-hidden text-transparent rounded-2xl'
+              className='object-cover overflow-hidden text-transparent rounded-2xl aspect-video'
             />
           </Link>
         </div>
@@ -22,7 +22,7 @@ export const RecentCard: React.FC<BlogCardProps> = (props) => {
             className='p-1 text-xs font-medium tracking-widest text-white uppercase duration-300 ease-in-out bg-red-500 rounded-sm hover:bg-red-300'
             href='/fbs/fbs-independent'
           >
-            FBS Independent
+            {category}
           </a>
           <h3 className='=transition mt-2 font-cal text-xl font-medium leading-normal tracking-normal duration-300 ease-in-out'>
             <Link href={href}>{title}</Link>

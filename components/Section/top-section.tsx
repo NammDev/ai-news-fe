@@ -14,6 +14,7 @@ export const TopSection: React.FC<{ articles: Article[] }> = ({ articles }) => {
           author={firstArticles.author}
           createdAt={firstArticles.createdAt}
           title={firstArticles.title}
+          category={firstArticles.category.name}
         />
 
         <div className='mt-12 sm:mt-16 lg:ml-12 lg:mt-0 lg:w-1/2 xl:ml-16'>
@@ -21,7 +22,7 @@ export const TopSection: React.FC<{ articles: Article[] }> = ({ articles }) => {
             Recent Articles
           </h2>
           <div className='grid divide-y lg:grid-cols-2 lg:gap-5 xl:grid-cols-1'>
-            {articles.slice(0, 5).map((article, index) => {
+            {articles.slice(1, 6).map((article, index) => {
               return (
                 <RecentCard
                   media={article.preview}
@@ -31,6 +32,7 @@ export const TopSection: React.FC<{ articles: Article[] }> = ({ articles }) => {
                   author={article.author}
                   createdAt={article.createdAt}
                   excerpt={article.excerpt}
+                  category={article.category.name}
                 />
               )
             })}

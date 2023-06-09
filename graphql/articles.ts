@@ -13,6 +13,10 @@ export const ARTICLES = `
         author {
           name
         }
+        category { 
+          id
+          name
+        }
         createdAt
         slug
       }

@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Media as MediaType } from '@/@types/payload'
 import { Media } from '../Media'
+import RichText from '.'
 
 export type RichTextUploadNodeType = {
   value?: MediaType
@@ -21,6 +22,7 @@ export const RichTextUpload: React.FC<Props> = (props) => {
   return (
     <div className={className}>
       <Media resource={value} />
+      {value?.caption && <RichText content={value.caption} />}
     </div>
   )
 }

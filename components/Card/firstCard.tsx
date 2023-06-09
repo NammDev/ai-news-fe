@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { formatDate } from '@/lib/utils'
 
 export const FirstCard: React.FC<BlogCardProps> = (props) => {
-  const { createdAt, href, media, title, excerpt, author } = props
+  const { createdAt, href, media, title, excerpt, author, category } = props
   return (
     <article className='relative lg:sticky lg:top-8 lg:w-1/2'>
       <div>
-        <Link className='block aspect-w-16 aspect-h-9 ' href={href}>
+        <Link className='block' href={href}>
           <Media
-            className='object-cover overflow-hidden text-transparent rounded-2xl'
+            className='object-cover overflow-hidden text-transparent rounded-2xl aspect-video'
             resource={media}
           ></Media>
         </Link>
@@ -20,7 +20,7 @@ export const FirstCard: React.FC<BlogCardProps> = (props) => {
             className='p-1 text-xs font-medium tracking-widest text-white uppercase duration-300 ease-in-out bg-red-500 rounded-sm hover:bg-red-300'
             href='/fbs/pac-12'
           >
-            Pac-12
+            {category}
           </a>
           <div className='block mt-3'>
             <h1 className='text-3xl font-medium tracking-normal transition duration-300 ease-in-out font-cal text-slate-900 md:tracking-tight lg:text-4xl lg:leading-tight'>

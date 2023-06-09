@@ -52,25 +52,22 @@ export const Image: React.FC<Props> = (props) => {
     .join(', ')
 
   return (
-    <>
-      <NextImage
-        className={[imgClassName].filter(Boolean).join(' ')}
-        src={src}
-        alt={alt || ''}
-        onClick={onClick}
-        onLoad={() => {
-          setIsLoading(false)
-          if (typeof onLoadFromProps === 'function') {
-            onLoadFromProps()
-          }
-        }}
-        fill={fill}
-        width={!fill ? width : undefined}
-        height={!fill ? height : undefined}
-        sizes={sizes}
-        priority={priority}
-      />
-      {resource?.caption && <RichText content={resource.caption} />}
-    </>
+    <NextImage
+      className={[imgClassName].filter(Boolean).join(' ')}
+      src={src}
+      alt={alt || ''}
+      onClick={onClick}
+      onLoad={() => {
+        setIsLoading(false)
+        if (typeof onLoadFromProps === 'function') {
+          onLoadFromProps()
+        }
+      }}
+      fill={fill}
+      width={!fill ? width : undefined}
+      height={!fill ? height : undefined}
+      sizes={sizes}
+      priority={priority}
+    />
   )
 }

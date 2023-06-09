@@ -19,6 +19,7 @@ export const BottomSection: React.FC<{ articles: Article[] }> = ({ articles }) =
                   excerpt={article?.excerpt}
                   author={article.author}
                   createdAt={article.createdAt}
+                  category={article.category.name}
                 />
               )
             })}
@@ -33,8 +34,8 @@ export const BottomSection: React.FC<{ articles: Article[] }> = ({ articles }) =
               {articles.slice(0, 2).map((article, index) => {
                 return (
                   <FeatureCard
-                    media={article.preview}
                     key={index}
+                    media={article.preview}
                     href={article?.slug || ''}
                     title={article.title}
                     author={article.author}
