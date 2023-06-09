@@ -3,6 +3,7 @@ import { Author, Media as MediaType } from '@/@types/payload'
 import { formatDate } from '@/lib/utils'
 import { Media } from '../Media'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export interface SharedProps {
   title?: string
@@ -22,7 +23,7 @@ export const ContentMediaCard: React.FC<BlogCardProps> = (props) => {
   const { createdAt, href, media, title, excerpt, author } = props
 
   return (
-    <a className='flex transition duration-300 ease-in-out hover:scale-105' href={href}>
+    <Link className='flex transition duration-300 ease-in-out hover:scale-105' href={href}>
       <article className='flex flex-col overflow-hidden shadow-xl rounded-2xl'>
         <Media
           className='flex-shrink-0 object-cover w-full h-48 text-transparent'
@@ -31,7 +32,7 @@ export const ContentMediaCard: React.FC<BlogCardProps> = (props) => {
         {/* width={388} height={192} */}
         <div className='flex flex-col justify-between flex-1 p-6 bg-white'>
           <div className='flex-1'>
-            <p className='text-sm font-medium uppercase text-brand-600'>FCS</p>
+            <p className='text-sm font-medium text-red-600 uppercase'>FCS</p>
             <div className='mt-2'>
               <h3 className='text-xl font-semibold font-cal text-slate-900'>{title}</h3>
               <p className='mt-3 text-base text-slate-500'>{excerpt}</p>
@@ -65,6 +66,6 @@ export const ContentMediaCard: React.FC<BlogCardProps> = (props) => {
           </div>
         </div>
       </article>
-    </a>
+    </Link>
   )
 }

@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import { Text } from 'slate'
 import RichTextUpload from './upload'
+import { CMSLink, Reference } from './link'
 
 // eslint-disable-next-line no-use-before-define
 type Children = Leaf[]
@@ -15,6 +16,7 @@ type Leaf = {
   }
   children: Children
   url?: string
+  newTab?: boolean
   [key: string]: unknown
 }
 
@@ -81,9 +83,15 @@ const serialize = (children: Children): React.ReactNode[] =>
         return <li key={i}>{serialize(node.children)}</li>
       case 'link':
         return (
-          <a href={escapeHTML(node.url)} key={i}>
+          <CMSLink
+            key={i}
+            type={node.linkType === 'internal' ? 'reference' : 'custom'}
+            url={node.url}
+            reference={node.doc as Reference}
+            newTab={node?.newTab}
+          >
             {serialize(node.children)}
-          </a>
+          </CMSLink>
         )
       case 'upload': {
         return <RichTextUpload key={i} node={node} />
