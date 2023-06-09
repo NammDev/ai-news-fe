@@ -12,6 +12,7 @@ export const fetchPosts = async (): Promise<Array<{ slug: string }>> => {
       'Content-Type': 'application/json',
     },
     next,
+    // cache: 'no-store',
     body: JSON.stringify({
       query: ARTICLES_SLUGS,
     }),

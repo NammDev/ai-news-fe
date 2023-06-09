@@ -6,8 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export interface SharedProps {
-  title?: string
-  description?: string
+  title: string
   className?: string
 }
 

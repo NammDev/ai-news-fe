@@ -1,11 +1,17 @@
 import { fetchBlogPosts } from '@/graphql'
-import RenderArticle from './renderArticles'
 import { Metadata } from 'next'
 import { mergeOpenGraph } from '@/seo/openGraph'
+import { BottomSection } from '@/components/Section/bottom-section'
+import { TopSection } from '@/components/Section/top-section'
 
 export default async function Home() {
   const articles = await fetchBlogPosts()
-  return <RenderArticle articles={articles} />
+  return (
+    <main>
+      <TopSection articles={articles} />
+      <BottomSection articles={articles} />
+    </main>
+  )
 }
 
 export const metadata: Metadata = {
